@@ -33,44 +33,6 @@ namespace IdentityServer
                 .AddInMemoryClients(Config.GetClients())
                 .AddTestUsers(Config.GetUsers());
 
-            //services.AddAuthentication(sharedOptions =>
-            //{
-            //    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    sharedOptions.DefaultChallengeScheme = WsFederationDefaults.AuthenticationScheme;
-            //})
-            //    .AddWsFederation(options => {
-            //        // MetadataAddress represents the Active Directory instance used to authenticate users.
-            //        options.MetadataAddress = "https://sts.sankoline.co.jp/FederationMetadata/2007-06/FederationMetadata.xml";
-            //        // Wtrealm is the app's identifier in the Active Directory instance.
-            //        // For ADFS, use the relying party's identifier, its WS-Federation Passive protocol URL:
-            //        options.Wtrealm = "https://PMS/";
-
-            //        // For AAD, use the App ID URI from the app registration's Properties blade:
-            //        //options.Wtrealm = "https://wsfedsample.onmicrosoft.com/bf0e7e6d-056e-4e37-b9a6-2c36797b9f01";
-            //        //options.SignOutWreply = ""
-            //    })
-            //    .AddCookie();
-
-            //services
-            //    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddWsFederation(o =>
-            //    {
-
-            //    });
-            //    .AddJwtBearer(o =>
-            //    {
-            //        o.Audience = "d9b8192f-530f-434b-be52-d2ea6f3be14e";
-            //        o.Authority = "https://sts.sankoline.co.jp/adfs";
-            //        o.RequireHttpsMetadata = false;
-            //        o.SaveToken = true;
-            //        o.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = false,
-            //            ValidateIssuer = true,
-            //            ValidateAudience = false
-            //        };
-            //    });
 
 
             if (Environment.IsDevelopment())
