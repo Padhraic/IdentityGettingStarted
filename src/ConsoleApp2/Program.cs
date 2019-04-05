@@ -4,7 +4,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace ConsoleApp2
 {
     class Program
     {
@@ -30,12 +30,15 @@ namespace ConsoleApp1
                 return;
             }
             // request token
-            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
 
                 ClientId = "client",
                 ClientSecret = "secret",
+
+                UserName = "alice",
+                Password = "password",
                 Scope = "api1"
             });
 

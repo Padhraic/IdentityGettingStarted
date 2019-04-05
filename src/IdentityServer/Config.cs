@@ -3,6 +3,7 @@
 
 
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
 
 namespace IdentityServer
@@ -29,12 +30,13 @@ namespace IdentityServer
         {
             return new List<Client>
             {
+                // resource owner password grant client
                 new Client
                 {
                     ClientId = "client",
 
                     // no interactive user, use the clientid/secret for authentication
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
                     // secret for authentication
                     ClientSecrets =
@@ -44,6 +46,25 @@ namespace IdentityServer
 
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
+                }
+            };
+        }
+
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
+            {
+                new TestUser
+                {
+                    SubjectId = "1",
+                    Username = "alice",
+                    Password = "password"
+                },
+                new TestUser
+                {
+                    SubjectId = "2",
+                    Username = "bob",
+                    Password = "password"
                 }
             };
         }
