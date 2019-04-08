@@ -3,6 +3,7 @@
 
 
 using System;
+using IdentityServer4;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.WsFederation;
@@ -33,7 +34,26 @@ namespace IdentityServer
                 .AddInMemoryClients(Config.GetClients())
                 .AddTestUsers(Config.GetUsers());
 
+            services.AddAuthentication()
+                .AddOpenIdConnect("oidc", "OpenID Connect", options =>
+            {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+                options.SaveTokens = true;
 
+                options.Authority = "http://localhost:5000";
+                options.ClientId = "adfs";
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role",
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateIssuerSigningKey =false
+
+                };
+            });
 
             if (Environment.IsDevelopment())
             {

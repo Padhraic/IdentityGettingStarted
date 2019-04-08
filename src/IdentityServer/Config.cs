@@ -51,25 +51,66 @@ namespace IdentityServer
                     AllowedScopes = { "api1" }
                 },
                 // OpenID Connect implicit flow client (MVC)
+                //new Client
+                //{
+                //    ClientId = "mvc",
+                //    ClientName = "MVC Client",
+                //    AllowedGrantTypes = GrantTypes.Implicit,
+
+                //    // where to redirect to after login
+                //    RedirectUris = { "http://localhost:5002/signin-oidc" },
+
+                //    // where to redirect to after logout
+                //    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+
+                //    AllowedScopes = new List<string>
+                //    {
+                //        IdentityServerConstants.StandardScopes.OpenId,
+                //        IdentityServerConstants.StandardScopes.Profile
+                //    }
+                //},
                 new Client
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.Hybrid,
 
-                    // where to redirect to after login
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
 
-                    // where to redirect to after logout
+                    RedirectUris           = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
-                    AllowedScopes = new List<string>
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    },
+                    AllowOfflineAccess = true
+                },
+                // JavaScript Client
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris =           { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:5003" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
                     }
                 }
-
             };
         }
 
