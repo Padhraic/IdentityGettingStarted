@@ -4,6 +4,7 @@
 
 using System;
 using IdentityServer4;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.WsFederation;
@@ -41,9 +42,14 @@ namespace IdentityServer
                 options.SignOutScheme = IdentityServerConstants.SignoutScheme;
                 options.SaveTokens = true;
 
-                options.Authority = "http://localhost:5000";
-                options.ClientId = "adfs";
-                options.RequireHttpsMetadata = false;
+ 
+                options.Authority = "https://sts.sankoline.co.jp/adfs";
+                options.ClientId = "6b1999ae-fb74-49de-8774-178386f2413e";
+                options.MetadataAddress = "https://sts.sankoline.co.jp/adfs/.well-known/openid-configuration";
+
+
+                options.ClaimActions.MapUniqueJsonKey("name", "sub");
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = "name",
