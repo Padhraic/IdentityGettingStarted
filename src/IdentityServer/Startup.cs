@@ -31,8 +31,8 @@ namespace IdentityServer
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients())
-                .AddTestUsers(Config.GetUsers());
+                .AddInMemoryClients(Config.GetClients());
+                //.AddTestUsers(Config.GetUsers());
 
             services.AddAuthentication()
                 .AddOpenIdConnect("oidc", "OpenID Connect", options =>
