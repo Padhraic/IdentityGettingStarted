@@ -44,8 +44,8 @@ namespace IdentityServer
 
  
                 options.Authority = "https://sts.sankoline.co.jp/adfs";
-                options.ClientId = "6b1999ae-fb74-49de-8774-178386f2413e";
-                options.MetadataAddress = "https://sts.sankoline.co.jp/adfs/.well-known/openid-configuration";
+                options.ClientId = "";
+                options.MetadataAddress = "";
 
 
                 options.ClaimActions.MapUniqueJsonKey("name", "sub");

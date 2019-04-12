@@ -15,12 +15,17 @@ namespace WebApplication3
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            //services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //app.UseCors(o => {
+            //    o.AllowAnyHeader();
+            //    o.AllowAnyOrigin();
+            //    o.AllowAnyMethod();
+            //});
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
